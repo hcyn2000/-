@@ -30,20 +30,20 @@
             </router-link>
           </div>
           <!-- 左箭头 -->
-          <router-link
+          <a
             hidefocus="true"
-            to="javascript:void(0)"
+            href="javascript:void(0)"
             class="btnl click-flag f-alpha"
             @click="gotoPage(prevIndex)"
-            >&lt;</router-link
+            >&lt;</a
           >
           <!-- 右箭头 -->
-          <router-link
+          <a
             hidefocus="true"
-            to="javascript:void(0)"
+            href="javascript:void(0)"
             class="btnr click-flag f-alpha"
             @click="gotoPage(nextIndex)"
-            >&gt;</router-link
+            >&gt;</a
           >
           <!-- 轮播图下面小点 -->
           <div class="dots f-cb">

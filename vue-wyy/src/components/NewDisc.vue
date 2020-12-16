@@ -203,11 +203,14 @@
                 <router-link
                   class="s-fc3"
                   to="/artist?id=35531"
-                  v-for="names in item.artists"
+                  v-for="(names, index) in item.artists"
                   :key="names.id"
-                  >{{ names.name }}</router-link
+                  >{{
+                    index == item.artists.length - 1
+                      ? names.name
+                      : names.name + " / "
+                  }}</router-link
                 >
-                &nbsp;/&nbsp;
                 <!-- <router-link class="s-fc3" to="/artist?id=286948">Benny Blanco</router-link> -->
               </p>
             </li>

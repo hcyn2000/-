@@ -60,11 +60,11 @@ export default {
   TopList(params) {
     return fetchGet('/toplist', params)
   },
-  // 榜单详情
+  // 获取歌单详情
   ListDetails(params) {
     return fetchGet('/playlist/detail', params)
   },
-  // 歌曲详情
+  // 获取歌曲详情
   SongDetails(params) {
     return fetchGet('/song/detail', params)
   },
@@ -72,8 +72,9 @@ export default {
   SearchSuggestions(params) {
     return fetchGet('/search/suggest', params)
   },
-  // 全部歌单
+  // 全部歌单 (网友精选)
   AllSongs(params) {
     return fetchGet('/top/playlist', params)
   },
+
 }

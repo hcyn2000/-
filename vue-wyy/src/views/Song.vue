@@ -7,10 +7,7 @@
             <div class="f-cb">
               <div class="cvrwrap f-cb f-pr">
                 <div class="u-cover u-cover-6 f-fl">
-                  <img
-                    src="http://p1.music.126.net/diGAyEmpymX8G7JcnElncQ==/109951163699673355.jpg?param=130y130"
-                    class="j-img"
-                  />
+                  <img :src="SongDetails.al.picUrl" class="j-img" />
                   <span class="msk f-alpha"></span>
                 </div>
                 <div class="out s-fc3">
@@ -24,23 +21,31 @@
                 <div class="hd">
                   <i class="lab u-icn u-icn-37"></i>
                   <div class="tit">
-                    <em class="f-ff2">起风了 </em>
+                    <em class="f-ff2">{{ SongDetails.name }} </em>
                     <a title="播放mv" href="/mv?id=10782615"
                       ><i class="icn u-icn u-icn-2"></i
                     ></a>
                   </div>
                 </div>
                 <p class="des s-fc4">
-                  歌手：<span title="买辣椒也用券"
-                    ><a class="s-fc7" href="/artist?id=12085562"
-                      >买辣椒也用券</a
-                    ></span
-                  >
+                  歌手：<span :title="singer"
+                    ><a
+                      class="s-fc7"
+                      href="/artist?id=12085562"
+                      v-for="(item, index) in SongDetails.ar"
+                      :key="item.id"
+                      >{{
+                        index == SongDetails.ar.length - 1
+                          ? item.name
+                          : item.name + " / "
+                      }}</a
+                    >
+                  </span>
                 </p>
                 <p class="des s-fc4">
-                  所属专辑：<a href="/album?id=74715426" class="s-fc7"
-                    >起风了</a
-                  >
+                  所属专辑：<a href="/album?id=74715426" class="s-fc7">{{
+                    SongDetails.al.name
+                  }}</a>
                 </p>
                 <div class="m-info">
                   <div id="content-operation" class="btns f-cb">
@@ -2059,7 +2064,37 @@
 </template>
 
 <script>
-export default {};
+import api from "@/api";
+export default {
+  name: "Song",
+  data() {
+    return {
+      SongDetails: [], // 歌曲详情
+      singer: "",
+    };
+  },
+  methods: {
+    getSongDetails() {
+      let id = this.$route.query.id;
+      const params = {
+        ids: id,
+      };
+      api.SongDetails(params).then((res) => {
+        // console.log(res);
+        this.SongDetails = res.songs[0];
+        for (let i = 0; i < this.SongDetails.ar.length - 1; i++) {
+          this.singer = this.singer + this.SongDetails.ar[i].name + " / ";
+        }
+        this.singer =
+          this.singer +
+          this.SongDetails.ar[this.SongDetails.ar.length - 1].name;
+      });
+    },
+  },
+  mounted() {
+    this.getSongDetails();
+  },
+};
 </script>
 
 <style lang="less">

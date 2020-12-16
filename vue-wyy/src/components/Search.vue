@@ -18,7 +18,6 @@
         >
       </span>
     </div>
-    <div class="j-showoff u-showoff f-hide"><p>现在支持搜索MV啦~</p></div>
     <span
       class="j-flag"
       style="/* display:none; */"
@@ -42,7 +41,10 @@
             <ul class="f-cb">
               <!-- 循环单曲 -->
               <li v-for="item in songs" :key="item.id">
-                <router-link class="s-fc0 f-thide xtag" to="#" data-type=""
+                <router-link
+                  class="s-fc0 f-thide xtag"
+                  to=""
+                  @mousedown.native="PageJump(item.id)"
                   >{{ item.name }}-{{ item.artists[0].name }}</router-link
                 >
               </li>
@@ -157,6 +159,12 @@ export default {
     clickSearch() {
       this.disappear = false;
       this.$refs.gain.focus();
+    },
+    // 页面跳转
+    PageJump(id) {
+      // console.log(id);
+      this.$router.push({ path: "/song", query: { id: id } });
+      // this.$router.go(0);
     },
   },
   watch: {

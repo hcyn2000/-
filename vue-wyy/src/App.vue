@@ -95,9 +95,7 @@
         </ul>
       </div>
     </div>
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
