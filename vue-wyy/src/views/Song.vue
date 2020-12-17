@@ -10,12 +10,6 @@
                   <img :src="SongDetails.al.picUrl" class="j-img" />
                   <span class="msk f-alpha"></span>
                 </div>
-                <div class="out s-fc3">
-                  <i class="u-icn u-icn-95 f-fl"></i>
-                  <a data-href="/outchain/2/1330348068/" class="des s-fc7"
-                    >生成外链播放器</a
-                  >
-                </div>
               </div>
               <div class="cnt">
                 <div class="hd">
@@ -54,6 +48,7 @@
                       class="u-btn2 u-btn2-2 u-btni-addply f-fl"
                       hidefocus="true"
                       title="播放"
+                      @click="GetMusicUrl"
                       ><i><em class="ply"></em>播放</i></a
                     >
                     <a
@@ -76,7 +71,7 @@
                     >
                   </div>
                 </div>
-                <div
+                <!-- <div
                   id="lyric-content"
                   class="bd bd-open f-brk f-ib"
                   copy-from=""
@@ -107,7 +102,7 @@
                       >展开<i class="u-icn u-icn-69"></i
                     ></a>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div id="user-operation" class="lrc-user">
@@ -2070,7 +2065,7 @@ export default {
   data() {
     return {
       SongDetails: [], // 歌曲详情
-      singer: "",
+      singer: "", // 歌手名字
     };
   },
   methods: {
@@ -2088,6 +2083,15 @@ export default {
         this.singer =
           this.singer +
           this.SongDetails.ar[this.SongDetails.ar.length - 1].name;
+      });
+    },
+    GetMusicUrl() {
+      const params = {
+        id: this.$route.query.id,
+      };
+      api.MusicUrl(params).then((res) => {
+        // console.log(res);
+        this.$store.commit("modifyUrl", res.data[0].url);
       });
     },
   },

@@ -5,13 +5,13 @@
       <div class="u-title f-cb">
         <h3>
           <span class="f-ff2 d-flag">全部</span
-          ><router-link
-            to="javascript:;"
+          ><a
+            href="javascript:;"
             class="u-btn2 u-btn2-1 menu d-flag"
             id="cateToggleLink"
             @click.stop="ClickDisplay"
             ><i>选择分类<em class="u-icn u-icn-38"></em></i
-          ></router-link>
+          ></a>
         </h3>
         <div class="u-btn f-fr u-btn-hot d-flag">
           <router-link to="/discover/playlist/" class="a1" data-order="hot"
@@ -638,16 +638,6 @@ export default {
   float: left;
   font-size: 24px;
   font-weight: normal;
-}
-.u-btn2,
-.u-btn2 i {
-  display: inline-block;
-  height: 31px;
-  line-height: 31px;
-  overflow: hidden;
-  vertical-align: top;
-  text-align: center;
-  cursor: pointer;
 }
 .u-title .menu {
   font-size: 12px;

@@ -95,15 +95,18 @@
         </ul>
       </div>
     </div>
+    <Player></Player>
     <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
 import Search from "@/components/Search.vue";
+import Player from "@/components/Player.vue";
 export default {
   components: {
     Search,
+    Player,
   },
   data() {
     return {

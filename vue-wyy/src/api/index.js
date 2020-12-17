@@ -76,5 +76,8 @@ export default {
   AllSongs(params) {
     return fetchGet('/top/playlist', params)
   },
-
+  // 获取音乐url
+  MusicUrl(params) {
+    return fetchGet('/song/url', params)
+  },
 }

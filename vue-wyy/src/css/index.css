@@ -160,8 +160,12 @@ button :focus {
 .u-btn2, .u-btn2 i, .u-btn2 .icn, .u-btni, .u-btni i, .u-tag, .u-tag i, .u-btni-addply .ply {
   background: url(../images/button2.png) no-repeat 0 9999px;
 }
-
-
+.m-playbar .updn .left, .m-playbar .updn .right, .m-playbar .updn .btn, .m-playbar .bg, .m-playbar .btns a, .m-playbar .head .mask, .m-playbar .icn, .m-playbar .ctrl, .m-playbar .tip, .m-vol .curr, .m-playbar .words .mv, .m-vol .barbg, .m-playbar .words .src {
+  background: url(../images/playbar.png) no-repeat 0 9999px;
+}
+.m-pbar .barbg, .m-pbar .cur, .m-pbar .rdy, .m-pbar .left {
+  background: url(../images/statbar.png) no-repeat 0 9999px;
+}
 
 
 .f-cb:after {
@@ -352,6 +356,13 @@ button :focus {
   color: #fff;
   background-position: right -428px;
 }
+.u-btn2-2:hover {
+  color: #fff;
+  background-position: right -510px;
+}
+.u-btn2, .u-btn2:hover {
+  text-decoration: none;
+}
 .u-btni {
   padding: 0 5px 0 0;
   white-space: nowrap;
@@ -397,19 +408,7 @@ button :focus {
 .u-btni-share i {
   background-position: 0 -1225px;
 }
-.u-btn2, .u-btn2:hover {
-  text-decoration: none;
-}
-.u-btni, .u-btni:hover {
-  color: #333;
-  text-decoration: none;
-}
-.u-btni-addply {
-  float: left;
-}
-.u-btni-addply i {
-  padding: 0 7px 0 8px;
-}
+
 .u-btn2, .u-btn2 i {
   display: inline-block;
   height: 31px;
@@ -425,6 +424,16 @@ button :focus {
   line-height: 30px;
   min-width: 23px;
   cursor: pointer;
+}
+.u-btni, .u-btni:hover {
+  color: #333;
+  text-decoration: none;
+}
+.u-btni-addply {
+  float: left;
+}
+.u-btni-addply i {
+  padding: 0 7px 0 8px;
 }
 
 .u-title .u-btn .a1, .u-title .u-btn .a2 {
