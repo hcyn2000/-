@@ -33,7 +33,7 @@
             hidefocus="true"
             data-action="play"
             class="ply j-flag"
-            :class="{ pas: play }"
+            :class="{ pas: this.$store.state.play }"
             @click="ClickToPause"
             title="播放/暂停(p)"
             >播放/暂停</a
@@ -48,9 +48,11 @@
           >
         </div>
         <div class="head j-flag">
-          <img
-            src="https://p1.music.126.net/wRWdpTaB7tCKS1TQTLv8BA==/109951165531747155.jpg?param=34y34"
-          /><a href="/song?id=1803349526" hidefocus="true" class="mask"></a>
+          <img :src="details.al.picUrl" /><router-link
+            to="/song?id=1803349526"
+            hidefocus="true"
+            class="mask"
+          ></router-link>
         </div>
         <div class="play">
           <div class="j-flag words">
@@ -59,7 +61,7 @@
               to="/song?id=1803349526"
               class="f-thide name fc1 f-fl"
               title="野心"
-              >野心</router-link
+              >{{ details.name }}</router-link
             >
             <a
               hidefocus="true"
@@ -69,8 +71,17 @@
             ></a
             ><span class="by f-thide f-fl"
               ><span title="薛之谦"
-                ><a class="" href="/artist?id=5781" hidefocus="true"
-                  >薛之谦</a
+                ><a
+                  class=""
+                  href="/artist?id=5781"
+                  hidefocus="true"
+                  v-for="(item, index) in details.ar"
+                  :key="item.id"
+                  >{{
+                    index == details.ar.length - 1
+                      ? item.name
+                      : item.name + " / "
+                  }}</a
                 ></span
               ></span
             >
@@ -145,21 +156,37 @@
         </div> -->
       </div>
     </div>
-    <audio autoplay="autoplay" :src="this.$store.state.MusicUrl"></audio>
+    <audio
+      autoplay="autoplay"
+      id="audio"
+      loop
+      :src="this.$store.state.MusicUrl"
+    ></audio>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      play: false, // 是否播放
+      isPlay: true, // 是否播放
     };
   },
   methods: {
     ClickToPause() {
-      this.play = !this.play;
+      this.isPlay = !this.isPlay;
+      let audio = document.querySelector("#audio");
+      if (this.isPlay) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      this.$store.commit("PlayPause", this.isPlay);
     },
+  },
+  computed: {
+    ...mapState(["details"]),
   },
 };
 </script>

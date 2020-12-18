@@ -66,9 +66,9 @@
                     <a class="u-btni u-btni-dl" href="javascript:;"
                       ><i>下载</i></a
                     >
-                    <a href="javascript:;" class="u-btni u-btni-cmmt"
+                    <!-- <a href="javascript:;" class="u-btni u-btni-cmmt"
                       ><i>(<span id="cnt_comment_count">451271</span>)</i></a
-                    >
+                    > -->
                   </div>
                 </div>
                 <!-- <div
@@ -104,15 +104,6 @@
                   </div>
                 </div> -->
               </div>
-            </div>
-            <div id="user-operation" class="lrc-user">
-              <p>
-                <a class="f-tdu s-fc4" href="/lyric/report?id=1330348068"
-                  >报错</a
-                >
-              </p>
-              <p class="s-fc3"></p>
-              <!--#if-->
             </div>
           </div>
           <!-- <div
@@ -2070,9 +2061,8 @@ export default {
   },
   methods: {
     getSongDetails() {
-      let id = this.$route.query.id;
       const params = {
-        ids: id,
+        ids: this.$route.query.id,
       };
       api.SongDetails(params).then((res) => {
         // console.log(res);
@@ -2093,6 +2083,8 @@ export default {
         // console.log(res);
         this.$store.commit("modifyUrl", res.data[0].url);
       });
+      this.$store.commit("ClickPlay", true);
+      this.$store.commit("details", this.SongDetails);
     },
   },
   mounted() {
