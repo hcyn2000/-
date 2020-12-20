@@ -1,4 +1,5 @@
 <template>
+  <!-- 播放功能 -->
   <div class="g-btmbar">
     <div
       class="m-playbar m-playbar-lock"
@@ -33,7 +34,7 @@
             hidefocus="true"
             data-action="play"
             class="ply j-flag"
-            :class="{ pas: this.$store.state.play }"
+            :class="{ pas: play }"
             @click="ClickToPause"
             title="播放/暂停(p)"
             >播放/暂停</a
@@ -60,7 +61,7 @@
               hidefocus="true"
               to="/song?id=1803349526"
               class="f-thide name fc1 f-fl"
-              title="野心"
+              :title="details.name"
               >{{ details.name }}</router-link
             >
             <a
@@ -70,7 +71,7 @@
               title="MV"
             ></a
             ><span class="by f-thide f-fl"
-              ><span title="薛之谦"
+              ><span :title="details.ar[0].name"
                 ><a
                   class=""
                   href="/artist?id=5781"
@@ -95,7 +96,10 @@
                 ></span>
               </div>
             </div>
-            <span class="j-flag time"><em>00:28</em> / 03:40</span>
+            <span class="j-flag time"
+              ><em>{{ musicDuration | filtersTime(musicDuration) }}</em> /
+              {{ totalDuration | filtersTime }}</span
+            >
           </div>
         </div>
         <!-- <div class="oper f-fl">
@@ -156,27 +160,27 @@
         </div> -->
       </div>
     </div>
-    <audio
-      autoplay="autoplay"
-      id="audio"
-      loop
-      :src="this.$store.state.MusicUrl"
-    ></audio>
+    <audio id="audio" autoplay loop ref="audioRef" :src="MusicUrl"></audio>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { songTimeFormat } from "@/common/js/ConversionTime.js";
+
 export default {
   data() {
     return {
       isPlay: true, // 是否播放
+      musicDuration: 0, //当前进度
+      totalDuration: 0, //最大值
     };
   },
   methods: {
+    // 点击暂停播放
     ClickToPause() {
       this.isPlay = !this.isPlay;
-      let audio = document.querySelector("#audio");
+      let audio = this.$refs.audioRef;
       if (this.isPlay) {
         audio.play();
       } else {
@@ -184,9 +188,35 @@ export default {
       }
       this.$store.commit("PlayPause", this.isPlay);
     },
+    //初始化音乐
+    installMusic() {
+      // console.log(1);
+      const audio = this.$refs.audioRef;
+      // console.log(audio);
+
+      //初始化进度条时间
+      audio.currentTime = this.musicDuration;
+      //监听音频改变
+      audio.addEventListener("timeupdate", () => {
+        //获得音频长度
+        this.totalDuration = audio.duration;
+        //获取歌曲时间
+        this.musicDuration = audio.currentTime;
+      });
+    },
   },
   computed: {
-    ...mapState(["details"]),
+    ...mapState(["MusicUrl", "play", "details"]),
+  },
+  filters: {
+    filtersTime(time) {
+      return songTimeFormat(time);
+    },
+  },
+  watch: {
+    MusicUrl() {
+      this.installMusic();
+    },
   },
 };
 </script>
