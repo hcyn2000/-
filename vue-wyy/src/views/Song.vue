@@ -1,4 +1,5 @@
 <template>
+  <!-- 歌曲页面 -->
   <div class="g-bd4 f-cb">
     <div class="g-mn4">
       <div class="g-mn4c">

@@ -27,6 +27,12 @@ const routes = [
     name: 'Song',
     component: () => import('../views/Song.vue')
   },
+  {
+    // 排行榜
+    path: '/discover/toplist',
+    name: 'Toplist',
+    component: () => import('../views/Toplist.vue')
+  },
 ]
 
 const router = new VueRouter({
